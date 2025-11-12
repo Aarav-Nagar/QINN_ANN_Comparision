@@ -1,8 +1,8 @@
 # Quantum-Inspired Neural Networks vs Traditional ANNs for Stock Price Prediction
 
-**Author:** [Your Name]
-**School:** [Your School]
-**Date:** November 2024
+**Author:** Aarav Nagar
+**School:** FCS Innovation Academy
+**Date:** November 2025
 
 ## 🎯 Project Summary
 Comparison of Quantum-Inspired Neural Networks (QINN) vs Advanced Artificial Neural Networks (ANN) for multi-horizon stock price prediction across 15 stocks.
@@ -66,5 +66,4 @@ python analyze_results.py
 First comprehensive comparison of QINN vs ensemble ANN architectures for multi-horizon financial prediction with rigorous statistical validation.
 
 ## 📧 Contact
-[Your Email]
-[GitHub Link if available]
+aarav.nagar22@gmail.com
