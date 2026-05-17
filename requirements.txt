@@ -1,0 +1,16 @@
+numpy
+pandas
+scipy
+scikit-learn
+torch
+pennylane
+xgboost
+yfinance
+matplotlib
+seaborn
+joblib
+psutil
+
+# Optional: only needed if you want to extend the feature set with TA-Lib calls.
+# TA-Lib can require a separate native install on Windows.
+# TA-Lib

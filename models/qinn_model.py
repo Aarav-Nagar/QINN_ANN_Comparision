@@ -12,7 +12,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import pennylane as qml
 from pennylane import numpy as pnp
-from typing import Dict, List, Tuple, Optional, Union, Callable
+from typing import Any, Dict, List, Tuple, Optional, Union, Callable
 import logging
 from sklearn.metrics import accuracy_score, mean_squared_error, r2_score
 import warnings
@@ -286,11 +286,11 @@ class QuantumMeasurement:
         self.n_qubits = n_qubits
         self.measurement_type = measurement_type
     
-    def pauli_z_expectation(self) -> List[qml.operation.Observable]:
+    def pauli_z_expectation(self) -> List[Any]:
         """Measure expectation values of Pauli-Z on each qubit."""
         return [qml.PauliZ(wires=i) for i in range(self.n_qubits)]
     
-    def pauli_xyz_expectation(self) -> List[qml.operation.Observable]:
+    def pauli_xyz_expectation(self) -> List[Any]:
         """Measure expectation values of Pauli-X, Y, Z on each qubit."""
         observables = []
         for i in range(self.n_qubits):
@@ -301,7 +301,7 @@ class QuantumMeasurement:
             ])
         return observables
     
-    def custom_observables(self) -> List[qml.operation.Observable]:
+    def custom_observables(self) -> List[Any]:
         """Custom observables for financial prediction."""
         observables = []
         
@@ -316,7 +316,7 @@ class QuantumMeasurement:
         
         return observables
     
-    def get_observables(self) -> List[qml.operation.Observable]:
+    def get_observables(self) -> List[Any]:
         """Get observables based on measurement type."""
         if self.measurement_type == 'pauli_z':
             return self.pauli_z_expectation()

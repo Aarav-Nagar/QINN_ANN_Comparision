@@ -661,12 +661,17 @@ class DataProcessor:
                 df = df.merge(self.macro_data, left_index=True, right_index=True, how='left')
                 df = df.fillna(method='ffill').fillna(method='bfill')
             
+            # Add technical indicators before target creation. These indicators
+            # use current and historical OHLCV values only.
+            df = self.add_technical_indicators(df)
+
             # Create features and targets
             df = self.create_features_and_targets(df, stock_symbol)
             
             # Remove any rows with NaN targets
             target_cols = [col for col in df.columns if col.startswith('target_')]
-            df = df.dropna(subset=target_cols)
+            if target_cols:
+                df = df.dropna(subset=target_cols)
             
             if len(df) < 500:  # Minimum data requirement
                 self.logger.warning(f"Insufficient processed data for {stock_symbol}: {len(df)} rows")
@@ -785,8 +790,9 @@ class DataProcessor:
         df2['vol_rolling_mean_20'] = df2['Volume'].rolling(20).mean()
         df2['vol_over_avg'] = df2['Volume'] / (df2['vol_rolling_mean_20'] + 1e-9)
 
-        # Fill remaining NaNs
-        df2 = df2.fillna(method='ffill').fillna(method='bfill')
+        # Fill remaining NaNs without using future rows. Early rolling-window
+        # values become neutral zeros instead of being backward-filled.
+        df2 = df2.ffill().fillna(0)
         return df2
 
     def _rsi(self, series: pd.Series, window: int = 14) -> pd.Series:

@@ -9,7 +9,10 @@ import numpy as np
 import pandas as pd
 from typing import Dict, List, Tuple, Optional
 import logging
-import talib
+try:
+    import talib
+except ImportError:
+    talib = None
 from scipy import stats
 from sklearn.preprocessing import StandardScaler
 import warnings
